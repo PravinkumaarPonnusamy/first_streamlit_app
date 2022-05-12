@@ -1,4 +1,11 @@
 import streamlit
+import pandas
+import requests
+import snowflake.connector
+from urllib.error import URLError
+
+
+
 
 streamlit.title ('My Mom\'s New Healthy Diner')
 streamlit.header('Breakfast Favorites')
@@ -10,7 +17,7 @@ streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 
 
 
-import pandas
+# import pandas
 My_Fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 #streamlit.dataframe(My_Fruit_list)
 My_Fruit_list = My_Fruit_list.set_index('Fruit')
@@ -34,7 +41,9 @@ streamlit.write('the user entered',fruit_choice)
 
 
 streamlit.header('Fruityvise Fruit Advice!')
-import requests
+
+#import requests
+
 fruityvise_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
 
 
@@ -44,7 +53,12 @@ fruityvise_normalized = pandas.json_normalize(fruityvise_response.json())
 streamlit.dataframe(fruityvise_normalized)
 
 
-import snowflake.connector
+# don't run anything past here while we trouble shoot
+streamlit.stop()
+
+
+
+# import snowflake.connector
 
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
