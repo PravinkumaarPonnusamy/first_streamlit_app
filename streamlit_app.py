@@ -29,14 +29,13 @@ Fruits_to_show = My_Fruit_list.loc[Fruits_selected]
 # display the table on the page
 streamlit.dataframe(Fruits_to_show)
 
-
-def get_fruitvise_data(this_fruit_choice):
+#create repeatable code block (called a function)
+def get_fruityvise_data(this_fruit_choice):
     fruityvise_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
     fruityvise_normalized = pandas.json_normalize(fruityvise_response.json())
     return fruityvise_normalized
   
 #new section to display fruityvice API advise
-
 streamlit.header('Fruityvise Fruit Advice!')
 try:
   fruit_choice = streamlit.text_input('What Fruit would you like Infromation about?')
